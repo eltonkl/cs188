@@ -1,5 +1,7 @@
 # Brian Segmentation & Skull Stripping 
 
+![Example of skull stripping](http://atc.udg.edu/nic/margaToolbox/images/graph.png "Example of skull stripping")
+
 ## Introduction
 
 Skull stripping, which is one form of brain segmentation, refers to the 
@@ -12,9 +14,14 @@ tissue segmentation, while also decreasing algorithm complexity (Roy 2015).
 Skull stripped images have become a standard preliminary step for many 
 brain image processing tools. 
 
+This website will be updated on the status of our progress on the project.
+
 ## Updates
 
+* [4/14/17: First meeting with Dr. Fabian Scalzo](first-meeting.md)
 * [4/28/17: Background research and literature review](lit-review.md) 
+* [5/2/17: Acquiring the FLAIR data](acquire-data.md)
+
 
 
 
