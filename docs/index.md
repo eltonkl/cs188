@@ -14,7 +14,7 @@ brain image processing tools.
 
 ## Updates
 
-* [4/28/17: Background research and literature review](lit_review.pdf) 
+* [4/28/17: Background research and literature review](lit-review.md) 
 
 
 
