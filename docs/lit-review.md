@@ -1,11 +1,11 @@
-# Background Research
+# Background Research and Literature Review (4/28/17)
 
 Before starting our project, we performed some background research to
 understand more about the problem, including reading online articles on skull stripping
 to find out what it is used for. We then studied recent research papers written
 by experts in the field to better understand the state-of-the-art methods currently
 used for skull stripping. We then summarized our research, findings, and project plan in
-a [literature review document](lit_review.pdf), which is also reproduced below.
+a [literature review document](public/lit_review.pdf), which is also reproduced below.
 
 # Skull Stripping - Literature Review
 

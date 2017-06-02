@@ -1,4 +1,4 @@
-# First meeting with Dr. Fabian Scalzo
+# First meeting with Dr. Fabian Scalzo (4/14/17)
 
 We met with our professor, Dr. Fabian Scalzo, to get an overview of the project requirements
 and to get some advice on how to start. 
