@@ -1,4 +1,4 @@
-# Background Research and Literature Review (4/28/17)
+# Background Research and Literature Review
 
 Before starting our project, we performed some background research to
 understand more about the problem, including reading online articles on skull stripping

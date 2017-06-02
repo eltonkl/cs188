@@ -1,4 +1,4 @@
-# Acquiring the FLAIR data (5/2/17)
+# Acquiring the FLAIR data
 
 In order to be able to train a machine learning model, we needed a training set of images
 and their ground truths bitmasks. The first step would be to acquire brain and skull images
