@@ -20,7 +20,7 @@ Anonymizer software that was able to do this task in a batch quickly.
 
 Here is a sample of what the FLAIR images we selected looked like:
 
-![FLAIR image sample](public/flair.png "FLAIR image sample")
+<div style="text-align:center"><img src ="public/flair.png" /></div>
 
 The next step was transferring some of the images to us so we can use them in training our model. At
 first we looked through all the folders containing the images, and selected the FLAIR images one at
