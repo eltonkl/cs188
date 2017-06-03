@@ -22,9 +22,9 @@ This website will be updated on the status of our progress on the project.
 * [4/28/17: Background research and literature review](lit-review.md) 
 * [5/2/17: Acquiring the FLAIR data](data.md)
 * [5/13/17: Creating the ground truth bitmasks with OsiriX](bitmasks.md)
-* [5/21/17: Trying out Tensorflow and neural networks](tensorflow.md)
-* [5/29/17: Second version of the code with scikit-learn](scikit.md)
-* [6/1/17: Optimizations and documentation](optimize.md)
+* [5/21/17: Preprocessing the images](preprocessing.md)
+* [5/29/17: Training the model with scikit-learn](scikit.md)
+* [6/1/17: Optimizations, flags, and documentation](optimize.md)
 
 ## Results
 
