@@ -1,9 +1,11 @@
-# Preprocessing the images
+# Training the machine learning model
 
 Now it was time to finally start coding up our machine learning model. We decided to train a model that
 takes a n x n square grid of pixel values, where n is odd, and predict whether the center pixel is 
 inside the skull or not. To do this, we have to first read in the training images and convert each 
 into sets of n x n pixels.
+
+## Preprocessing the images
 
 Our first step was to read in all of our training data. We looped through all files
 in the input directory that started with 'IM', and used a Python library called
@@ -107,3 +109,89 @@ pixel results to be used in training the machine learning model:
 # Return the training set
 	return (pixel_data, pixel_result)
 ```
+
+## Training the model
+
+At first, we tried using the Tensorflow library and train a neural network on the
+pixel data. However, this turned out to be cumbersome and inaccurate, so we decide
+to use the scikit-learn library instead. After training the model on the data,
+we stored the generated classifier to an output file for later use. This way, we
+would not have to retrain the model every time we wanted to use it to perform skull
+stripping:
+
+```python
+##
+# Trains the classifier given a set of training data, dumps the generated classifier
+# to an output file for later use
+#
+# output_file_name: [string] Output filename of the generated classifier
+#
+# USES GLOBAL VARIABLE (due to python memory sharing constraints):
+# pixel_data: [2D float array] Each array entry contains the pixel values (BLOCK_SIZE^2) that surround
+#             a pixel in the image and the location of the pixel relative to the center of the image
+# pixel_results: [1D binary array] Array regarding whether or not each pixel entry from pixel_data array
+#                is part of the brain (value = 1) or not (value = 0)
+##
+def train_model(output_file_name):
+	# Create the classifier and fit the data to it
+	my_classifier = get_classifier()
+	my_classifier.fit(pixel_data, pixel_result)
+
+	# Dump the generated classifier to an output file for later use
+	joblib.dump(my_classifier, output_file_name)
+```
+
+For the classifier itself, we tried numerous different types of classifiers,
+including nearest neighbors, SVM, and decision trees. However, our best accuracy
+came from the random forest classifier:
+
+```python
+##
+# Configure and return a classifier for our data
+#
+# We found that the Random Forest Classifier gave us the best results (in a reasonable
+# amount of time)
+##
+def get_classifier():
+	# n_jobs = -1 allows us to use all cores of our machine
+	return RandomForestClassifier(n_jobs = -1)
+```
+
+Note that we are multithreading the training process to speed it up.
+
+## Testing the trained model
+
+To evaluate which classifier worked the best and for us to get an idea of the
+accuracy of our methods, we split the training set into a training set and a
+testing set. After training the model on the training set, we tested its accuracy
+using the testing set:
+
+```python
+##
+# Given a set of data splits it into (1 - test_size) of training data and test_size of testing data.
+# Trains the classifier using the training data and provides the accuracy of the classifier using
+# the testing data
+#
+# test_size: [float] Percent of data that should be used
+#
+# USES GLOBAL VARIABLE (due to python memory sharing constraints):
+# pixel_data: [2D float array] Each array entry contains the pixel values (BLOCK_SIZE^2) that surround
+#             a pixel in the image and the location of the pixel relative to the center of the image
+# pixel_results: [1D binary array] Array regarding whether or not each pixel entry from pixel_data array
+#                is part of the brain (value = 1) or not (value = 0)
+##
+def test_model(test_size):
+	# Split the data into training and testing data
+	X_train, X_test, y_train, y_test = train_test_split(pixel_data, pixel_result, test_size=test_size)
+
+	# Create the classifier and trains it on the the training data
+	my_classifier = get_classifier()
+	my_classifier.fit(X_train, y_train)
+
+	# Tests the classifier on the testing data and prints the accuracy results
+	predictions = my_classifier.predict(X_test)
+	print(accuracy_score(y_test, predictions))
+```
+
+Our model using the random forest classifier consistently gave us around 96% to 97%
+accuracy, which is fairly good. We also determined that the best block size was 11.
