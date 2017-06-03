@@ -1,6 +1,6 @@
 # Brian Segmentation & Skull Stripping 
 
-![Example of skull stripping](http://atc.udg.edu/nic/margaToolbox/images/graph.png "Example of skull stripping")
+<div style="text-align:center"><img src ="http://atc.udg.edu/nic/margaToolbox/images/graph.png" /></div>
 
 ## Introduction
 

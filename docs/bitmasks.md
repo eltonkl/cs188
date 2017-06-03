@@ -15,7 +15,7 @@ good for training our model.
 
 Here is an example of one of the images we selected:
 
-<div style="text-align:center"><img src ="public/data-example.png" /></div>
+<div style="text-align:center; height: 300px;"><img src ="public/data-example.png" /></div>
 
 ## Selecting the ROIs
 
@@ -23,12 +23,15 @@ Now, we used the OsiriX in order to select regions in the brain to generate the 
 the ventricles in the middle of the brain. Using the ROI selector in OsiriX, we played around with the 
 algorithm and parameters until the growing ROI region best fit the ventricles:
 
-<div style="text-align:center"><img src ="public/ventricles" /></div>
+<div style="text-align:center; height: 300px;"><img src ="public/ventricles.png" /></div>
 
 After selecting those ROIs, we set all pixel values inside them to zero.
 
 Next step was to remove the skull and everything outside the brain. We again used the ROI selector and
-played around with the parameters until we could accurately select the brain:
+played around with the parameters until we could accurately select the brain. Then, we set all pixel
+values outside the ROI to zero:
+
+<div style="text-align:center; height: 300px;"><img src ="public/brain.png" /></div>
  
  
 
