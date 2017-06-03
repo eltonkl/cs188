@@ -24,7 +24,7 @@ This website will be updated on the status of our progress on the project.
 * [5/13/17: Creating the ground truth bitmasks with OsiriX](bitmasks.md)
 * [5/21/17: Training the machine learning model](training.md)
 * [5/29/17: Using the model to make predictions](predictions.md)
-* [6/1/17: Optimizations, flags, and documentation](optimize.md)
+* [6/1/17: Optimizations and documentation](optimize.md)
 
 ## Results
 
