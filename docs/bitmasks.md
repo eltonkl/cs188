@@ -38,8 +38,8 @@ algorithm, and set all pixels inside it to 1000. This resulted in our final bitm
 
 <div style="text-align:center;"><img style="height: 300px;" src ="public/final-bitmask.png" /></div>
 
-We did these steps for all of the FLAIR images we selected. After finishing processing each image, we
-exported the bitmask as a DICOM file to use as the ground truths later when training our model.
+We did these steps for all of the FLAIR images we selected. After finishing processing all of the images, 
+we exported the bitmasks as DICOM files to be used as the ground truths later when training our model.
 
 
 
