@@ -414,21 +414,16 @@ def compute_dice(dir_path_ground, dir_path_test):
 
 		print("Computing dice score for " + name + " (" + str(width) + ", " + str(height) + ")")
 
-		true_positives = 0
-		false_positives = 0
-		positives_A = 0
-		# Iterate through all pixels (excluding MARGINs)
+		correct = 0
+		# Iterate through all pixels
 		for y in range (0, height):
 			for x in range (0, width):
-				if ground[y, x] != 0:
-					positives_A += 1
-					if test[y, x] != 0:
-						true_positives += 1
-				else:
-					if test[y, x] != 0:
-						false_positives += 1
+				if ground[y, x] != 0 and test[y, x] != 0:
+						correct += 1
+				elif ground[y, x] == 0 and test[y, x] == 0:
+						correct += 1
 
-		dice = true_positives / (positives_A + false_positives)
+		dice = correct / (height * width)
 
 		print("> " + str(dice))
 		dice_sum += dice

@@ -21,6 +21,7 @@ To apply our trained classifer on the testing data, we first loaded the classifi
 ##
 def process_image(image_name, last_four_args):
 
+    input_dir, output_dir, classifier_path, bitmask_mode = last_four_args
 
     try:
         print(image_name + " is being processed...")
