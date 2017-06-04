@@ -338,6 +338,13 @@ def test_model(test_size):
 	predictions = my_classifier.predict(X_test)
 	print(accuracy_score(y_test, predictions))
 
+##
+# Applies masks to all files in the image_dir_path and places the files in output_dir_path
+#
+# image_dir_path: [string] Directory with MRI images
+# mask_dir_path: [string] Directory with skull stripping masks
+# output_dir_path: [string] Directory where masked images are stored
+##
 def apply_mask(image_dir_path, mask_dir_path, output_dir_path):
 	file_list = []
 	for name in os.listdir(image_dir_path):
@@ -362,9 +369,9 @@ def apply_mask(image_dir_path, mask_dir_path, output_dir_path):
 
 		print("Masking " + name + " (" + str(width) + ", " + str(height) + ")")
 
-		# Iterate through all pixels (excluding MARGINs)
-		for y in range (MARGIN, height - MARGIN):
-			for x in range (MARGIN, width - MARGIN):
+		# Iterate through all pixels
+		for y in range (0, height):
+			for x in range (0, width):
 				if mask_dc[y, x] == 0:
 					input_dc[y, x] = 0
 
@@ -374,11 +381,62 @@ def apply_mask(image_dir_path, mask_dir_path, output_dir_path):
 
 		print("File saved to " + output_dir_path + name)
 
-
 ##
-# // Overall details, CLI comments, etc
+# Computes the dice score for all images in dir_path_ground and dir_path_test with the
+# same file name (and start with IM)
 #
+# dir_path_ground: [string] Directories with ground truth dicom images
+# dir_path_test: [string] Directories with test truth dicom images
 ##
+def compute_dice(dir_path_ground, dir_path_test):
+	dice_sum = 0
+	dice_count = 0
+
+	file_list = []
+	for name in os.listdir(dir_path_ground):
+		if not name.startswith('IM-'):
+			continue
+
+		try:
+			ground_file = dicom.read_file(dir_path_ground + name)
+			ground = ground_file.pixel_array
+
+			test_file = dicom.read_file(dir_path_test + name)
+			test = test_file.pixel_array
+		except Exception as e:
+			print("[ERROR]")
+			print(e)
+			continue
+
+		# Dimensions  of the image
+		height = len(ground)
+		width = len(ground[0])
+
+		print("Computing dice score for " + name + " (" + str(width) + ", " + str(height) + ")")
+
+		true_positives = 0
+		false_positives = 0
+		positives_A = 0
+		# Iterate through all pixels (excluding MARGINs)
+		for y in range (0, height):
+			for x in range (0, width):
+				if ground[y, x] != 0:
+					positives_A += 1
+					if test[y, x] != 0:
+						true_positives += 1
+				else:
+					if test[y, x] != 0:
+						false_positives += 1
+
+		dice = true_positives / (positives_A + false_positives)
+
+		print("> " + str(dice))
+		dice_sum += dice
+		dice_count += 1
+
+	print("Average dice score: " + str(dice_sum/dice_count))
+
+
 def main():
 	parser = argparse.ArgumentParser(description='Trains and tests a machine learning model to perform skull stripping on MRI images.')
 	parser.add_argument('-t','--trainpath', help='path to the training data. defaults to ./data/train/', default=TRAINING_DATA_PATH)
@@ -388,6 +446,7 @@ def main():
 	parser.add_argument('-b', '--bitmask', action='store_true', help='stores the result as a bitmask instead of stripping the original image.')
 	parser.add_argument('-r', '--resultpath', help='path to store the results of the processing. defaults to ./data/result', default=RESULT_DATA_PATH)
 	parser.add_argument('-m', '--mask', nargs=3, help='apply a mask to dicom images [image directory] [mask directory] [output directory]', default=[])
+	parser.add_argument('-d', '--dice', nargs=2, help='compute dice scores [ground truth directory] [result directory]', default=[])
 	args = vars(parser.parse_args())
 
 	bitmask_mode = args['bitmask']
@@ -404,7 +463,9 @@ def main():
 	elif len(args['mask']) > 0:
 		if not os.path.exists(result_data_path):
 			os.makedirs(result_data_path)
-		apply_mask(args['mask'][0], args['mask'][1], args['mask'][2])
+		apply_mask(args['mask'][0], args['mask'][1], args['mask'][2])		
+	elif len(args['dice']) > 0:
+		compute_dice(args['dice'][0], args['dice'][1])
 	else:
 		generate_training_data(training_data_path)
 		train_model(classifier_file_path)
