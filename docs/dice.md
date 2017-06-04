@@ -5,7 +5,7 @@ Although we could visually see that our results were quite good, we wanted to qu
 ## Computing the Dice Score
 We computed the Dice score as such:
 <div style="text-align:center"><img src ="https://wikimedia.org/api/rest_v1/media/math/render/svg/e02846ea5780d8c2afaecff495bdcd654d1f93f5" /></div>
-where X is the set of segmented pixels in the ground truth bit masks and Y is the set of segmented pixels in the resulting bit masks
+where X is the set of segmented pixels in the ground truth bit masks and Y is the set of segmented pixels in our program output bit masks
 
 ```python
 ##

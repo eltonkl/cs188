@@ -1,9 +1,9 @@
 # Improving the results
 
-The results we attained were very promising, however, we wanted to see if we could improve them further. To do this we considered two postprocessing options. Overall, we found that combining both approach gave us the best results.
+The results we attained were very promising. We achieved a mean Dice score of 95.75, however, we wanted to see if we could improve our results further. To do this we considered two postprocessing options. Overall, we found the two-phased approach gave us the best results.
 
 ## Neighbor Analysis
-The first approach we tried was neighbor analysis. We looped through each pixel in the image and if more than 84\% (tested out different values) of the pixels in the 5x5 grid around it were of a specific type (0 or 1), we changed its type to match the majority. This allowed us to fill in small holes in the image. We also tried doing multiple passes of this but that resulted in too many false positives. 
+The first approach we tried was neighbor analysis. We looped through each pixel in the image and if more than 84% (tested out different values) of the pixels in the 5x5 grid around it were of a specific type (0 or 1), we changed its type to match the majority. This allowed us to fill in small holes in the image. We also tried doing multiple passes of this but that resulted in too many false positives. This approach yielded a mean Dice score of 95.87.
 
 ```python
 ##
@@ -41,7 +41,7 @@ def neighbor_postprocess(image_data):
 	return image_data
 ```
 ## Two-Phased Approach 
-The second approach was to have two-phases. In the first phase, we do the same thing as our original approach and train the algorithm normally. This allows the program to create the skull stripping bit masks from MRIs. In the second phase we use a different training set to generate bit masks using the learning from phase 1 and then train the same algorithm to take these bit masks and make them more like the ground truth. This two phased approach gave us a better results with a mean Dice score of 94.82.
+The second approach was to have two-phases. In the first phase, we do the same thing as our original approach and train the algorithm normally. This allows the program to create the skull stripping bit masks from MRIs. In the second phase we use a different training set to generate bit masks using the learning from phase 1 and then train the same algorithm to take these bit masks and make them more like the ground truth. This two phased approach gave us a better results with a mean Dice score of 97.02. Using both approaches resulted in a mean Dice score of 97.01.
 
 ```shell
 function train {	
