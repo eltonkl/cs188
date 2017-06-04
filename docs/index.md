@@ -1,6 +1,6 @@
 # Brian Segmentation & Skull Stripping 
 
-<div style="text-align:center"><img src ="http://atc.udg.edu/nic/margaToolbox/images/graph.png" /></div>
+<div style="text-align:center"><img src ="public/front.png" /></div>
 
 ## Introduction
 

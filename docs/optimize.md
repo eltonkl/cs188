@@ -67,4 +67,4 @@ function process {
 }
 ```
 # Final Results
-<div style="text-align:center"><img src ="/public/results.png" /></div>
+<div style="text-align:center"><img src ="public/results.png" /></div>
