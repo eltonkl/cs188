@@ -66,3 +66,5 @@ function process {
 	python3 skullstrip.py -m ./data/test/ ./data/phase2result/ ./data/result/
 }
 ```
+# Final Results
+<div style="text-align:center"><img src ="/public/results.png" /></div>
