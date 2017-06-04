@@ -61,5 +61,5 @@ Kleesiek, with some modifications. In particular, we will also be stripping the
 ventricles in the center of the brain from the image. We will be using the OsiriX 
 software to manually prepare the training data we will use. By selecting the brain 
 sections with the program, we can export a binary mask of the image. Finally, we will 
-train our dataset with a convolutional network written using the Tensorflow framework, 
+train our dataset with a machine learning algorithm written using the SciKit-Learn library, 
 and test its accuracy. 
