@@ -30,4 +30,4 @@ This website will be updated on the status of our progress on the project.
 
 Our final report can be found here:
 
-[Final Report](report.pdf)
+[Final Report](/report/report.pdf)
