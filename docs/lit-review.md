@@ -51,7 +51,7 @@ with minimal (or even no) need for parameter turning. In particular, they traine
 deep convolutional neural networks that can automatically learn the important features 
 in the dataset from training, and used them to able to extract the brains from various 
 types of scans with impressive accuracy (Kleesiek 2016). Their mean Dice score, which 
-is a common measure of accuracy for these sort of tasks, was 95.12, which outperforms 
+is a common measure of accuracy for these sort of tasks, was 95.19, which outperforms 
 many of other techniques mentioned above.
 
 ## Conclusion and Project Plan
@@ -61,5 +61,4 @@ Kleesiek, with some modifications. In particular, we will also be stripping the
 ventricles in the center of the brain from the image. We will be using the OsiriX 
 software to manually prepare the training data we will use. By selecting the brain 
 sections with the program, we can export a binary mask of the image. Finally, we will 
-train our dataset with a machine learning algorithm written using the SciKit-Learn library, 
-and test its accuracy. 
+train our dataset with a machine learning algorithm written using the SciKit-Learn library, and test its accuracy. 

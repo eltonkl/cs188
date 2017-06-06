@@ -151,8 +151,8 @@ def process_image(image_name, last_four_args):
 				elif bitmask_mode:
 					predict_dc_file.pixel_array[y, x] = 100000
 
-		if bitmask_mode:
-			predict_dc_file.pixel_array = neighbor_postprocess(predict_dc_file.pixel_array)
+		# if bitmask_mode:
+		# 	predict_dc_file.pixel_array = neighbor_postprocess(predict_dc_file.pixel_array)
 
 		# Save modified image in new file
 		predict_dc_file.PixelData = predict_dc_file.pixel_array.tostring()
