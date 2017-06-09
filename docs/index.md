@@ -1,5 +1,3 @@
-# Brian Segmentation & Skull Stripping 
-
 <div style="text-align:center"><img src ="public/front.png" /></div>
 
 ## Introduction
