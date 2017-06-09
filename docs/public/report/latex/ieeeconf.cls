@@ -731,9 +731,9 @@
 % [2004/1/15 revision V1.6b by Pradeep Misra]
 \DeclareOption{letterpaper}{\setlength{\paperheight}{11in}%
                             \setlength{\paperwidth}{8.5in}%
-%			    \setlength{\topmargin}{0in}%
-                            \def\@IEEEmarginE{0.75in}%
-                            \def\@IEEEmarginW{0.75in}}
+			    \setlength{\topmargin}{-2.5in}%
+                            \def\@IEEEmarginE{0.5in}%
+                            \def\@IEEEmarginW{0.5in}}
 
 
 \DeclareOption{a4paper}{\setlength{\paperheight}{297mm}%
@@ -1140,8 +1140,8 @@
 % V1.6 conference mode margins
 \if@confmode
   % [2004/10/15 revision V1.6c by Pradeep Misra]
- \topmargin        -0.25in
- \textheight        9.5in % The standard for conferences
+ \topmargin        -0.5in
+ \textheight        12in % The standard for conferences
   % However, we will adjust this a  tad so that an integer number
   % of lines will always fit on each page
   % The baselineskip (leading) for each document point size is used 
@@ -1153,14 +1153,14 @@
  \ifx\@IEEEptsize\@IEEEptsizetwelve\textheight=676.8pt\fi   %9.2473in  47 lines/page
 \else
  \topmargin        -49.0pt
- \textheight        58pc % = 9.63in or 696pt
+ \textheight        60pc % = 9.63in or 696pt
 \fi
 
   % [2004/1/15 revision V1.6b by Pradeep Misra]
 %\textwidth         43pc   % 2 x 21pc + 1pc = 43pc
 %\columnsep          1pc
 
-\textwidth         7.0in   % 2 x 21pc + 1pc = 43pc
+\textwidth         7.5in   % 2 x 21pc + 1pc = 43pc
 \columnsep         0.2in
 
 % IEEE MARGIN INFO and new \overrideIEEEmargins command
@@ -1289,7 +1289,7 @@
 % However, \trivlist will use this as will most
 % things built from \trivlist like the \center
 % environment.
-\topsep           0.5\baselineskip
+\topsep           0\baselineskip
 
 % Controls the additional spacing around lists preceded
 % or followed by blank lines. IEEE does not increase

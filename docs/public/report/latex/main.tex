@@ -8,9 +8,7 @@
 Skull Stripping Axial FLAIR MRIs\\ of the Brain using Machine Learning
 }
 
-\author{Vipul Kashyap and Jerry Li \\ %
-Computer Science 188 \\
-UCLA - Spring 2017 
+\author{Vipul Kashyap and Jerry Li
 }
 
 \begin{document}
@@ -26,9 +24,9 @@ In this project our goal was to segment brain tissue in axial FLAIR MRIs using m
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{INTRODUCTION}
-Skull stripping refers to the process of isolating the brain from other structures in a medical image of the brain. This usually involves the removal of the skull and any other non-brain tissue from the image, such as the dura and scalp. It is often done as a preprocessing step as it is improves the speed and accuracy of many brain image analysis/processing algorithms while also decreasing algorithm complexity \textsuperscript{[1]}. \par
+Skull stripping refers to the process of isolating brain tissue from other structures in a medical image of the brain. This usually involves the removal tissue such as the dura and scalp from the image. It is often done as a preprocessing step as it is improves the speed and accuracy of many brain image analysis/processing algorithms while also decreasing algorithm complexity \textsuperscript{[1]}. \par
 Our goal was to segment the brain tissue in MR images with reasonably high accuracy and speed. Since traditional techniques require tuning of several numerical parameters depending on the dataset to achieve the reasonable results, we used machine learning to develop a more effective and easier to use tool. Unlike most other skull stripping techniques we also removed the ventricles. We focused on axial FLAIR MRIs of the brain. \par
-A paper by Kleesiek et al had already applied a deep learning architecture to this problem (attaining a mean dice score of 95.19 for clinical data)\textsuperscript{[2]} and so we decided to explore a different approach. Our algorithm used each pixel's location and value as well as the values of neighboring pixels to determine whether the pixel was part of brain tissue. We optimized multiple parameters and applied various techniques to ensure that our tool was flexible enough to work on different MR images regardless of the noise/contrast differences in the images and would provide the best results. \par
+A paper by Kleesiek et al had already applied a deep learning architecture to this problem (attaining a mean Dice score of 95.19 for clinical data)\textsuperscript{[2]} and so we decided to explore a different approach. Our algorithm used each pixel's location and value as well as the values of neighboring pixels to determine whether the pixel was part of brain tissue. We optimized multiple parameters and applied various techniques to ensure that our tool was flexible enough to work on different MR images regardless of the noise/contrast differences in the images and would provide the best results. \par
 We manually skull stripped anonymized MRI data provided by the University of California, Los Angeles to create our training and testing data. The tool was written in Python and relies on various Python libraries such as Google's SciKit-Learn and PyDicom.
 
 \section{METHODS AND CONSIDERATIONS}
@@ -60,11 +58,11 @@ Since our images had varying widths, we were unable to just use the X and Y posi
 We also wanted to account for noise in the images. We did this by adding a preprocessing step of slightly blurring the images. Unfortunately, this resulted in worse results and so it was undone. We also tried downscaling images to half their size, processing them, and then upscaling them again. We hoped that this would allow the model to consider a larger region of the image for each pixel, however it only resulted in lower resolution and less accurate results. Although we were unable to find an effective way to fight noise differences between images, it was not a big concern as it did not have a significant impact on our overall results.
 
 \subsection{Post Processing and Optimizations}
-Although our results were quite good (dice score of 91.90), we wanted to see how we could postprocess the bit masks to get even better results. We tried two approaches:
+Although our results were quite good (dice score of 95.75), we wanted to see how we could postprocess the bit masks to get even better results. We tried two approaches:
 \subsubsection{Neighbor Analysis}
-We loop through each pixel in the image and if more than 84\% (tested out different values) of the pixels in the 5x5 grid around it are of a specific type (0 or 1), we change its type to match the majority. This would allow us to fill in small holes in the image. We also tried doing  multiple passes of this but that resulted in too many false positives. Neighbor Analysis yielded a slightly increased mean dice score of 92.08.
+We loop through each pixel in the image and if more than 84\% (tested out different values) of the pixels in the 5x5 grid around it are of a specific type (0 or 1), we change its type to match the majority. This would allow us to fill in small holes in the image. We also tried doing  multiple passes of this but that resulted in too many false positives. Neighbor Analysis yielded a slightly increased mean dice score of 95.87.
 \subsubsection{Two Phased Training}
-We have two phases. The first phase is the same as our original apporach and trains the algorithm normally. This allows it to create the skull stripping bit masks from MRIs. The second phase uses a different training set to generate bit masks using the learning from phase 1 and then train the same algorithm to take these bit masks and make them more like the ground truth. This two phased approach gave us a better results with a mean Dice score of 94.82.
+We have two phases. The first phase is the same as our original apporach and trains the algorithm normally. This allows it to create the skull stripping bit masks from MRIs. The second phase uses a different training set to generate bit masks using the learning from phase 1 and then train the same algorithm to take these bit masks and make them more like the ground truth. This two phased approach gave us a better results with a mean Dice score of 97.02.
 
 When we combined both approaches we attained a mean Dice score of 97.01. It was clear that the two-phased approach was the way to go.
 
@@ -72,7 +70,7 @@ We also enabled multiprocessing in our training and batch skull stripping functi
 
 \begin{figure}
 \centering
-\includegraphics[width=7cm]{res.png}
+\includegraphics[width=6cm]{results.png}
 \caption{Left: Program Input, Right: Program Output}
 \end{figure}
 
