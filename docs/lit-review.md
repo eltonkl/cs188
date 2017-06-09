@@ -5,7 +5,7 @@ understand more about the problem, including reading online articles on skull st
 to find out what it is used for. We then studied recent research papers written
 by experts in the field to better understand the state-of-the-art methods currently
 used for skull stripping. We then summarized our research, findings, and project plan in
-a [literature review document](public/lit_review.pdf), which is also reproduced below.
+a [literature review document](public/lit-review.pdf), which is also reproduced below.
 
 # Skull Stripping - Literature Review
 
