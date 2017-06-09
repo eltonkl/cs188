@@ -44,19 +44,26 @@ optional arguments:
   -m MASK MASK MASK, --mask MASK MASK MASK
                         apply a mask to dicom images [image directory] [mask
                         directory] [output directory]
+  -d DICE DICE, --dice DICE DICE
+                        compute dice scores [ground truth directory] [result
+                        directory]
 ```
 
 In particular, once a model is trained, it can be used to perform skull stripping with the 
 flag `-p`. This defaults to performing skull stripping on the DICOM images in `./data/test/` and
-storing the processed images in the directory `./data/result`. These default directories can be
-changed with the `-i IMAGEPATH` and `-r RESULTPATH` options, respectively.
+storing the processed images in the directory `./data/result/`. These default directories can be
+changed with the `-i IMAGEPATH` and `-r RESULTPATH` options, respectively. The default directory for
+the training data is `./data/train/` which can be changed using `-t TRAINPATH`.
 
 ## Two-phased approach
 
 To run the two-phased approach described in our previous post, run the shell script `DualPass.sh`.
 This defaults to running both the training and processing procedures. Note that this shell script
-will only work when the first phase training images are located in `./data/train_phase1` and
-the second phase training images are located in `./data/train_phase2`.
+will only work when the first phase training images are located in `./data/train_phase1/` and
+the second phase training images are located in `./data/train_phase2/`.
 
 If `DualPass.sh train` in run instead, only the training step will be done. Similarly,
 `DualPass.sh process` will only to the processing and skull stripping part.
+
+Note, the shell script assumes that the system has a `python3` environment variable pointing to
+the python executable.
